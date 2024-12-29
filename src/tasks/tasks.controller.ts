@@ -13,12 +13,14 @@ import {
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
+import { ApiOperation } from '@nestjs/swagger';
 
 @Controller('tasks')
 export class TasksController {
   constructor(private tasksService: TasksService) {}
 
   @Get()
+  @ApiOperation({ summary: 'Get all tasks'})
   getAllTasks(@Query() query: any) {
     return this.tasksService.getTasks();
   }
@@ -29,6 +31,7 @@ export class TasksController {
   }
 
   @Post()
+  @ApiOperation({ summary: 'Create a task'})
   createTask(@Body() task: CreateTaskDto) {
     return this.tasksService.createTask(task);
   }
